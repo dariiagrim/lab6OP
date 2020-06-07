@@ -45,7 +45,7 @@ class SquareRoot(Function):
         m = 0
         while True:
             s = (math.pow(-1, m)*math.factorial(2*m)*math.pow(self.x, m))/((1-2*m)*math.pow(math.factorial(m), 2)*math.pow(4, m))
-            if abs(s) < 0.0001:
+            if abs(s) < 0.000000001:
                 break
             result += s
             m += 1
@@ -71,8 +71,38 @@ class Sequence(Function):
         return result
 
 
-root = SquareRoot(-0.5)
-print(root.calc())
+def work():
+    r = "sqrt(1+x)"
+    s = "(1-x^(m+1))/(1-x)"
+    print(f"Hrymalska Dariia, Var 6, Level B, calculate {r} and {s}")
 
-seq = Sequence(2, 1)
-print(seq.calc())
+    while True:
+        is_root = bool(int(input("If you want to calculate square root: enter 1, otherwise: enter 0 - ")))
+        if is_root:
+            x = float(input("Enter x(|x|<=1): "))
+            try:
+                root: Function = SquareRoot(x)
+            except ValueError:
+                print("Unsupported value, try again")
+                continue
+            print("Result: ", root.calc())
+            end = input("Do you want to exit?(+/-)")
+            if end == "+":
+                break
+        else:
+            x = float(input("Enter x(!=1): "))
+            m = int(input("Enter m(Natural): "))
+            try:
+                seq: Function = Sequence(x, m)
+            except ValueError:
+                print("Unsupported value, try again")
+                continue
+            print("Result", seq.calc())
+            end = input("Do you want to exit?(+/-)")
+            if end == "+":
+                break
+
+
+work()
+
+
