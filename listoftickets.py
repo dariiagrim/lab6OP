@@ -16,7 +16,7 @@ for city in cities:
     city_dict[city] = double_dict
 
 
-for i in range(10000):
+for i in range(200000):
     start = random.choice(cities)
     finish = random.choice([x for x in cities if x != start])
     num = str(random.randint(1, 30)).zfill(2)
@@ -35,6 +35,10 @@ for i in range(10000):
     ticket = Ticket(start, finish, date, time, car_class, price)
     city_dict[ticket.start][ticket.finish].append(ticket)
 
-with open("tickets.pickle", "wb") as f:
-    pickle.dump(city_dict, f)
+
+def rewrite():
+    with open("tickets.pickle", "wb") as f:
+        pickle.dump(city_dict, f)
+
+
 
