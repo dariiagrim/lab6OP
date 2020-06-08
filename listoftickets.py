@@ -41,4 +41,4 @@ def rewrite():
         pickle.dump(city_dict, f)
 
 
-
+# rewrite()
