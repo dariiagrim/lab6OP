@@ -125,8 +125,35 @@ class Ticket:
             raise ValueError
         self._date = value
 
+    @property
+    def time(self):
+        return self._time
 
+    @time.setter
+    def time(self, value):
+        if not isinstance(value, str):
+            raise ValueError
+        self._time = value
 
+    @property
+    def car_class(self):
+        return self._car_class
+
+    @car_class.setter
+    def car_class(self, value):
+        if not isinstance(value, str):
+            raise ValueError
+        self._car_class = value
+
+    @property
+    def price(self):
+        return self._price
+
+    @price.setter
+    def price(self, value):
+        if not isinstance(value, int):
+            raise ValueError
+        self._price = value
 
     def __str__(self):
         return f"{self.start}->{self.finish}, {self.date}, {self.time}, {self.car_class}, {self.price}"
@@ -219,7 +246,12 @@ class TicketOffice:
                     client_r = cl
         else:
             name, birth_date, id_number, mobile = self.ask_info()
-            client_r = Client(name, birth_date, id_number, mobile)
+            try:
+                client_r = Client(name, birth_date, id_number, mobile)
+            except ValueError:
+                print("Not correct data.")
+                self.try_again()
+
         if client_r is None:
             print("You are not in our base.")
             self.try_again()
@@ -364,6 +396,7 @@ if __name__ == "__main__":
         print("*", ticket1)
 
     office.ask_needs()
+
 
 
 
